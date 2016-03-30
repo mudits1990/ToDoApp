@@ -20,9 +20,10 @@ import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
-    url(r'/get-task-list', views.get_task_list),
-    url(r'/add-new-task', views.add_new_task),
-    url(r'/edit-task', views.edit_task),
-    url(r'/search', views.search_keyword),
-    url(r'/get-bookmarked-task-list', views.get_bookmarked_task_list)
+    url(r'get-task-list/', views.get_task_list),
+    url(r'add-new-task/', views.add_new_task),
+    url(r'edit-task/', views.edit_task),
+    url(r'search/', views.search_keyword),
+    url(r'get-bookmarked-task-list/', views.get_bookmarked_task_list),
+    url(r'edit-bookmark/', views.edit_bookmarks)
 ]
