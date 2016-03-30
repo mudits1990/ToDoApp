@@ -4,6 +4,7 @@ from django.db import models
 class Task(models.Model):
     task_id = models.IntegerField()
     task_name = models.CharField(max_length=200)
+    bookmark = models.BooleanField(default=False)
 
 
 class Tag(models.Model):
