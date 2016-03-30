@@ -12,17 +12,25 @@ def index(request):
 
 
 def get_task_list(request):
+    # GET request
     pass
 
 
 def add_new_task(request):
+    # POST request
     pass
 
 
 def edit_task(request):
+    # POST request
     pass
 
 
 def search_keyword(request):
+    # GET request
     pass
 
+
+def get_bookmarked_task_list(request):
+    # GET request
+    pass
