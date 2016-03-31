@@ -25,5 +25,4 @@ urlpatterns = [
     url(r'edit-task/', views.edit_task),
     url(r'search/', views.search_keyword),
     url(r'get-bookmarked-task-list/', views.get_bookmarked_task_list),
-    url(r'edit-bookmark/', views.edit_bookmarks)
 ]

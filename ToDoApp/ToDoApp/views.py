@@ -34,8 +34,3 @@ def search_keyword(request):
 def get_bookmarked_task_list(request):
     # GET request
     pass
-
-
-def edit_bookmarks(request):
-    # POST request
-    pass
