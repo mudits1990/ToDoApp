@@ -33,7 +33,6 @@ app.controller('MainCtrl', function($scope, taskListService, $http){
         })
     }
     $scope.toggleBookmark = function(index, task){
-        console.log("inside toogle bookmark", index, task)
         var url = '/edit-task/';
         var data = {taskId:task.taskId, taskName: task.taskName, bookmark:!task.bookmark, done:task.done};
         $http.post(url, data).success(function(data){
@@ -44,7 +43,6 @@ app.controller('MainCtrl', function($scope, taskListService, $http){
         })
     }
     $scope.toggleDone = function(index, task){
-        console.log("inside toggle done");
         var url = '/edit-task/';
         var data = {taskId:task.taskId, taskName: task.taskName, bookmark:task.bookmark, done:task.done};
         $http.post(url, data).success(function(data){
