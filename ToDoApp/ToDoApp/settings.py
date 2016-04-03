@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ToDoApp',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'ToDoApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'todolist',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -129,5 +134,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = "../static/"
 STATICFILES_DIRS = (
-    BASE_DIR + "/static/",  # <= don't forget a comma here
+    BASE_DIR + '/ToDoApp/' + "static/",  # <= don't forget a comma here
 )

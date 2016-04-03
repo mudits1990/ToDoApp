@@ -9,5 +9,8 @@ The name explains itself.
 * Run pip install -r requirements.txt
 
 # Run Server
-* python manage.py migrate
+* python manage.py syncdb
 * python manage.py runserver
+* create a database todolist in mysql
+* go to static folder run npm install
+* run gulp browserify

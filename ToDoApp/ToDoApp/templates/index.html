@@ -3,8 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo App</title>
+    <style>
+        @font-face {
+          font-family: "megrim";
+          src: url("../static/font/megrim/Megrim.ttf") format("truetype");
+        }
+        html {
+            font-family: Roboto, megrim
+        }
+        body {
+          background: #13756D;
+        }
+
+        .todo-wrapper {
+          background: #55B6AE;
+          width: 100%;
+        }
+        h2 {
+          font-size: 2em;
+
+          font-family: megrim, fantasy;
+          background: #1CA89C;
+          padding: 40px;
+          margin: 0;
+          color: #333;
+          text-align: center;
+         }
+        .emphasis {
+          font-family: vast-shadow, sans-serif;
+          font-size: 4em;
+        }
+        ul {
+          padding: 0px;
+          margin: 0px;
+        }
+        li {
+          font-family: roboto;
+          font-size: 2em;
+          padding: 40px;
+
+          background: #65d8cb; /* Old browsers */
+          background: -webkit-gradient(linear, 0 0, 0 100%, from(#65d8cb), to(#72f4e9));
+          background: -webkit-linear-gradient(#65d8cb 0%, #72f4e9 100%);
+          background: -moz-linear-gradient(#65d8cb 0%, #72f4e9 100%);
+          background: -o-linear-gradient(#65d8cb 0%, #72f4e9 100%);
+          background: linear-gradient(#65d8cb 0%, #72f4e9 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#65d8cb', endColorstr='#72f4e9',GradientType=0 );
+          list-style-type: none;
+          margin-left: 0px;
+          padding-left: 0px;
+        }
+
+        li input[type="checkbox"] {
+          width: 40px;
+        }
+
+        .done-true {
+          text-decoration: line-through;
+          color: #ddd;
+        }
+        .column-left{
+            float: left;
+            margin: 0;
+            min-width:49%;
+            height: auto;
+        }
+        .column-right{
+            float: left;
+            margin: 0;
+            min-width:49%;
+            height: auto;
+        }
+        .add-input {
+          width: 60%;
+          height: 20px;
+          float: left;
+          border: none;
+          padding: 40px 0;
+          font-size: 2em;
+          font-family: megrim, fantasy;
+          text-indent: 55px;
+        }
+        .add-btn {
+          width: 40%;
+          border: none;
+          background: #29F4E3;
+          padding: 0;
+          height: 100px;
+          float: right;
+        }
+
+        .clear-btn {
+          width: 100%;
+          border: none;
+          height: 100px;
+          background: #13756D;
+          font-size: 2em;
+          font-family: megrim, fantasy;
+          color: #aaa;
+        }
+    </style>
 </head>
-<body>
-    Hello World!
+<body ng-app="TodoApp">
+    {% verbatim %}
+    <div ng-controller="MainCtrl" class="todo-wrapper">
+        <h2>
+            You have got <span class="emphasis">{{taskList.length}}</span> task(s) left.
+        </h2>
+        <!--<table>-->
+            <!--<tbody class="col s12">-->
+                <!--<tr>-->
+                    <!--<td class="card-panel #ffea00 yellow accent-3">-->
+                        <!--<div ng-repeat="task in taskList">-->
+                            <!--<span>-->
+                                <!--{{task.taskName}}-->
+                            <!--</span>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                    <!--<td class="card-panel #ff5722 deep-orange">-->
+                        <!--haskdhask-->
+                    <!--</td>-->
+                    <!--<td class="#00e5ff cyan accent-3">-->
+                        <!--bsakdabs-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+        <div class="column-left">
+            <h2 style="background-color:#F44336">All Tasks</h2>
+            <ul>
+                <li ng-repeat="todo in taskList track by $index">
+                  <input type="checkbox" ng-model="todo.done" ng-click="toggleDone($index, todo)"/>
+                  <span class="done-{{todo.done}}" style="word-wrap: break-word;">{{todo.taskName}}</span>
+                  <span style="float:right;" ng-if="todo.bookmark" ng-click="toggleBookmark($index, todo)">
+                      <svg id="Capa_1" x="0px" y="0px" width="21px" height="21px" viewBox="0 0 37.286 37.287" style="enable-background:new 0 0 37.286 37.287;">
+                        <g>
+                            <path d="M36.683,16.339l-7.567,7.377l1.786,10.417c0.128,0.75-0.182,1.509-0.797,1.957c-0.348,0.253-0.762,0.382-1.176,0.382   c-0.318,0-0.638-0.076-0.931-0.23l-9.355-4.918l-9.355,4.918c-0.674,0.355-1.49,0.295-2.107-0.15   c-0.615-0.448-0.924-1.206-0.795-1.957l1.787-10.417L0.604,16.34c-0.547-0.531-0.741-1.326-0.508-2.05   c0.236-0.724,0.861-1.251,1.615-1.361l10.459-1.521l4.68-9.478c0.335-0.684,1.031-1.116,1.792-1.116   c0.763,0,1.456,0.432,1.793,1.115l4.68,9.478l10.461,1.521c0.752,0.109,1.379,0.637,1.611,1.361   C37.425,15.013,37.226,15.808,36.683,16.339z" fill="#FFDA44"/>
+                        </g>
+                      </svg>
+                  </span>
+                  <span style="float:right;" ng-if="!todo.bookmark" ng-click="toggleBookmark($index, todo)">
+                      <svg id="Capa_1" x="0px" y="0px" width="21px" height="21px" viewBox="0 0 37.286 37.287" style="enable-background:new 0 0 37.286 37.287;">
+                        <g>
+                            <path d="M36.683,16.339l-7.567,7.377l1.786,10.417c0.128,0.75-0.182,1.509-0.797,1.957c-0.348,0.253-0.762,0.382-1.176,0.382   c-0.318,0-0.638-0.076-0.931-0.23l-9.355-4.918l-9.355,4.918c-0.674,0.355-1.49,0.295-2.107-0.15   c-0.615-0.448-0.924-1.206-0.795-1.957l1.787-10.417L0.604,16.34c-0.547-0.531-0.741-1.326-0.508-2.05   c0.236-0.724,0.861-1.251,1.615-1.361l10.459-1.521l4.68-9.478c0.335-0.684,1.031-1.116,1.792-1.116   c0.763,0,1.456,0.432,1.793,1.115l4.68,9.478l10.461,1.521c0.752,0.109,1.379,0.637,1.611,1.361   C37.425,15.013,37.226,15.808,36.683,16.339z" fill="white"/>
+                        </g>
+                      </svg>
+                  </span>
+                </li>
+            </ul>
+        </div>
+        <div class="column-right" style="margin-left:2%;">
+            <h2 style="background-color:#FFEB3B">Bookmarked Tasks</h2>
+            <ul>
+                <li ng-repeat="todo in taskList | filter:{bookmark:true}">
+                  <input type="checkbox" ng-model="todo.done" ng-click="toggleDone($index, todo)"/>
+                  <span class="done-{{todo.done}}">{{todo.taskName}}</span>
+                  <span style="float:right;" ng-if="todo.bookmark" ng-click="toggleBookmark($index, todo)">
+                      <svg id="Capa_1" x="0px" y="0px" width="21px" height="21px" viewBox="0 0 37.286 37.287" style="enable-background:new 0 0 37.286 37.287;">
+                        <g>
+                            <path d="M36.683,16.339l-7.567,7.377l1.786,10.417c0.128,0.75-0.182,1.509-0.797,1.957c-0.348,0.253-0.762,0.382-1.176,0.382   c-0.318,0-0.638-0.076-0.931-0.23l-9.355-4.918l-9.355,4.918c-0.674,0.355-1.49,0.295-2.107-0.15   c-0.615-0.448-0.924-1.206-0.795-1.957l1.787-10.417L0.604,16.34c-0.547-0.531-0.741-1.326-0.508-2.05   c0.236-0.724,0.861-1.251,1.615-1.361l10.459-1.521l4.68-9.478c0.335-0.684,1.031-1.116,1.792-1.116   c0.763,0,1.456,0.432,1.793,1.115l4.68,9.478l10.461,1.521c0.752,0.109,1.379,0.637,1.611,1.361   C37.425,15.013,37.226,15.808,36.683,16.339z" fill="#FFDA44"/>
+                        </g>
+                      </svg>
+                  </span>
+                </li>
+            </ul>
+        </div>
+        <div style="mar">
+            <input class="add-input" placeholder="I need to..." type="text" ng-model="formTodoText" ng-model-instant />
+            <button class="add-btn" ng-click="addTodo()"><h3 style="background: #29F4E3;padding: 0;font-size: 4em;font-family: megrim, fantasy;
+   color: #333;margin:0">Add</h3></button>
+        </div>
+    </div>
+    <div class="progress" ng-hide="true">
+      <div class="indeterminate"></div>
+    </div>
+    {% endverbatim %}
+    <script src="../static/dist/js/main.js"></script>
 </body>
 </html>

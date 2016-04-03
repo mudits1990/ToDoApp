@@ -4,3 +4,4 @@ argparse==1.2.1
 chardet==2.3.0
 diff-match-patch==20121119
 requests==2.9.1
+mysql-python
