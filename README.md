@@ -7,6 +7,7 @@ The name explains itself.
 * create a virtual environment virtualenv venv
 * activate . venv/bin/activate
 * Run pip install -r requirements.txt
+* Create a mysql root with password root with all priveleges
 
 # Run Server
 * python manage.py syncdb
