@@ -46,14 +46,19 @@ def add_new_task(request):
 def edit_task(request):
     # POST request
     json_data = json.loads(request.body)
-    print json_data
     task = Tasks.objects.get(task_id=json_data['taskId'])
-    print task
     task.task_name = json_data['taskName']
     task.bookmark = json_data['bookmark']
     task.done = json_data['done']
     task.save()
     return HttpResponse(json.dumps({'taskId': task.task_id, 'taskName': task.task_name, 'bookmark': task.bookmark, 'done': task.done}))
+
+
+@csrf_exempt
+def delete_task(request):
+    json_data = json.loads(request.body)
+    task = Tasks.objects.filter(task_id=json_data['taskId']).delete()
+    return HttpResponse(json.dumps({'status': 'success'}))
 
 
 @csrf_exempt
